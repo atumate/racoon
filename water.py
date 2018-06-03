@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 @app.route('/i')
 def index2():
-    return 'aha'
+    return 'bbb'
 
 @app.route('/')
 def index():
