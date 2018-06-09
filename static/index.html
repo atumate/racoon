@@ -3,12 +3,27 @@
 <head>
 	<title>racoon</title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/dist/style.css">
 </head>
 <body>
-	<div id="sec-input">
-		<input id="input-url" type="text" name="" placeholder="input targrt url here ...">
+	<div id="sec-options" style="display: none;">
 
-		<button id="btn-url-submit">submit</button>
+		<input type="checkbox" name="">add http://
+		<input type="checkbox" name="">add https://
+		<input type="checkbox" name="">add ftp://
+		
+
+	</div>
+
+	<button id="btn-preview">hold to preview</button>
+
+
+	<div id="sec-surls">
+
+		<button id="btn-url-submit">submit</button><br>
+		<textarea id="textarea-urls" placeholder="paste target-urls here ..."></textarea>
+
+		
 
 	</div>
 	
