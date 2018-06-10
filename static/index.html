@@ -6,22 +6,24 @@
 	<link rel="stylesheet" type="text/css" href="/dist/style.css">
 </head>
 <body>
-	<div id="sec-options" style="display: none;">
+	<div id="sec-options">
 
-		<input type="checkbox" name="">add http://
-		<input type="checkbox" name="">add https://
-		<input type="checkbox" name="">add ftp://
-		
+		<input type="checkbox" id="cb-add-http" name="">add http://
+		<input type="checkbox" id="cb-add-https" name="">add https://
+		<input type="checkbox" id="cb-add-ftp" name="">add ftp://
+		<button id="btn-preview">hover me to preview</button>
 
 	</div>
 
-	<button id="btn-preview">hold to preview</button>
+	
 
 
 	<div id="sec-surls">
 
-		<button id="btn-url-submit">submit</button><br>
-		<textarea id="textarea-urls" placeholder="paste target-urls here ..."></textarea>
+		
+		<button id="btn-urls-seq" class="btn-ajax">sequential</button>
+		<button id="btn-url-submit" class="btn-ajax">entire</button><br>
+		<textarea id="textarea-urls-raw" class="ta-urls" placeholder="paste target-urls here ..."></textarea>
 
 		
 
@@ -30,6 +32,12 @@
 	<div id="sec-probe">
 		<div id="response-raw"></div>
 	</div>
+
+	<div id="sec-loader">
+		
+	</div>
+
+
 
 
 
@@ -44,6 +52,7 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
 
+	<script src="./dist/jquery.highlight.js"></script>
 	<script src="./dist/main.js"></script>
 </body>
 </html>

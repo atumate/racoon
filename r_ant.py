@@ -16,6 +16,8 @@ def raw_response(targetURL):
 def parse_post_data(data):
 	if data['op'] == 'getUrlsStatusCode':
 		return get_urls_status_code(data['urls'])
+	elif data['op'] == 'getUrlStatusCode':
+		return get_url_status_code(data['url'])
 
 
 def get_urls_status_code(urls_list):
