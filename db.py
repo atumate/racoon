@@ -30,13 +30,17 @@ conn = engine.connect()
 cur_time=strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
 
-ins_urls = urls.insert().values()
-sel_urls = select([urls])
-r_urls_ins=conn.execute(ins_urls,time=cur_time, url='http://nixni.cc')
-r_urls = conn.execute(sel_urls)
+# r_urls_ins=conn.execute(urls.insert(),time=cur_time, url='http://nixni.cc')
 
-print(r_urls)
+result = conn.execute(select([urls]))
 
+
+for row in result:
+	print(row)
+
+
+# print(dir(r_urls))
+# print(r_urls.returns_rows)
 
 
 
