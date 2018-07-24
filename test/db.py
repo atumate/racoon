@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from sqlalchemy import create_engine
@@ -7,13 +7,17 @@ from time import localtime, strftime
 from sqlalchemy.sql import select
 import logging
 
-print('-->db.py start')
-
-logging.basicConfig(filename='log.txt',
+logging.basicConfig(
 	level=logging.DEBUG,
 	format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
 	datefmt='%m-%d %H:%M',
+	handlers=[
+        logging.FileHandler("{0}/{1}.log".format('.', 'db')),
+        #logging.StreamHandler()
+    ]
 	)
+
+logging.info('> db.py start < ')
 
 engine = create_engine('mysql://root:123@localhost/racoon')
 
@@ -29,11 +33,17 @@ metadata.create_all(engine, checkfirst=True)
 conn = engine.connect()
 cur_time = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
-def get_target(id):
+def get_target_byid(id):
 	result = conn.execute(
 		select([targets]).where(targets.c.id == id)
 		)
-	return result
+	return result.fetchone()
+
+def get_target_byname(name):
+	result = conn.execute(
+		select([targets]).where(targets.c.target == name)
+		)
+	return result.fetchone()
 
 def get_targets():
 	result = conn.execute(select([targets]))
@@ -52,7 +62,7 @@ def add_target(target_new):
 		pk=r_i_target.inserted_primary_key
 		return pk[0]
 
-def rm_target(id):
+def rm_target_byid(id):
 	try:
 		r_d_target=conn.execute(
 			targets.delete().where(targets.c.id == id)
@@ -63,13 +73,19 @@ def rm_target(id):
 	else:
 		return r_d_target.rowcount
 
+def rm_target_byname(name):
+	try:
+		r_d_target=conn.execute(
+			targets.delete().where(targets.c.target == name)
+			)
+	except Exception as e:
+		logging.debug(e)
+		return -1
+	else:
+		return r_d_target.rowcount
+
+logging.info('> db.py end < ')
 
 
 
 
-
-# rm_target(25)
-# add_target('vgv')
-
-
-print('<--db.py end')

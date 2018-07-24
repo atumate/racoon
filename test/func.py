@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import db
 
 def resp_get_targets():
@@ -8,15 +11,16 @@ def resp_get_targets():
 def resp_add_target(target_to_add):
 	added_id=db.add_target(target_to_add)
 	if added_id == -1:
-		print('Error! Maybe duplicated.')
+		print('Error! Maybe duplicated:')
+		print(db.get_target_byname(target_to_add))
 	else:
 		print('OK!')
-		print(db.get_target(added_id).fetchone())
+		print(db.get_target_byid(added_id))
 	return
 
-def resp_rm_target(id):
-	row=db.get_target(id).fetchone()
-	rows=db.rm_target(id)
+def resp_rm_target_byid(id):
+	row=db.get_target_byid(id)
+	rows=db.rm_target_byid(id)
 	if rows == -1:
 		print('Error! See log.txt for details.')
 	else:
@@ -25,9 +29,14 @@ def resp_rm_target(id):
 	return
 
 
-# resp_add_target('vvvddde')
-
-resp_get_targets()
-resp_rm_target(50)
+def resp_rm_target_byname(name):
+	row=db.get_target_byname(name)
+	rows=db.rm_target_byname(name)
+	if rows == -1:
+		print('Error! See log.txt for details.')
+	else:
+		print('OK! '+str(rows)+' row removed!')
+		print(row)
+	return
 
 
